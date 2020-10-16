@@ -1,60 +1,48 @@
 
-// import express from 'express';
-// sådan at den snakker sammen med users filen
-// import usersRoutes from './routes/user.js';
-
 const express = require('express');
 const server = express();
 const PORT = process.env.port || 4000;
-  // sådan at vi bruger alle routerne i Users filen, så når folk besøger dem kører routerne
-  // app.use('/users', usersRoutes)
-  // et API endpint, vores basic route, med en get request til vores homepage '/', efterfulgt af 
 
- //const port =  
 
 const usercontroller = require('../Controller/userController')
 
 //henter controller fra sti
 let userController = require('./Controller/userController')
   
-//read endpoint pÃ¥ routen '/'
+
 server.get('/', userController)
-  
   
 const Users = require('./Model/user.js');
   users = [];
 
 server.get("/user1", (req, res) => {
-    res.json(Users[0])//henter alle info om user 
+    res.json(Users[0])//henter alle info om user 1
  });
 
 server.get("/user2", (req, res) => {
-    res.json(Users[1])
+    res.json(Users[1]) // henter alle info om user 2 
  });
  
 
-  // vil gerne have User og de tre krav ind her
- // vi lytter på porten
-
 server.route('.Model/users.js') //Users route
-  .get(function (req, res) { //GET handling
-    res.send(JSON.stringify(users)) //Return users array
+  .get(function (req, res) { //get handling der sender og returner 
+    res.send(JSON.stringify(users)) //returnere userarray igennem JSON 
   })
   .post(function (req, res) { //POST handling
-    //Create a new payment user with the variables from the POST request
+    // skaber en ny paymentuser udfra variablerne fra POST request 
     let user = new userClass.paymentUser(req.body.firstname, rep.body.lastname, req.body.gender, rep.body.age, req.body.interest, req.body.email, req.body.city, req.body.password, req.body.creditCardName, req.body.creditCardNumber, req.body.creditCardExpiryDate, req.body.creditCardCVC)
-    users.push(user); //Add the user to the array
+    users.push(user); //tilføjer den nye user til array
 
   })
   .put(function (req, res) {
 
-      tempemail=req.body.email; //Grab email, parameter and value from PUT request
-      tempparam=req.body.param;
-      tempval=req.body.val
+      tempemail=req.body.email; //henter email put request 
+      tempparam=req.body.param; //henter parametre fra put request
+      tempval=req.body.val; //henter value fra put request
 
-      for (index = 0; index < users.length; ++index) { //Go through each user
-          if (users[index].email==tempemail){ //If a user email in the array matches the PUT request
-            users[index][tempparam] = tempval; //Set the parameter to the temp value from the PUT request
+      for (index = 0; index < users.length; ++index) { //loop der går igennem hver user
+          if (users[index].email==tempemail){ //If statement: hvis user email i arrayet matcher PUT request 
+            users[index][tempparam] = tempval; //så ville den sætte parametrene til det foreløbige value fra PUT request
           }
       }
     
@@ -64,9 +52,9 @@ server.route('.Model/users.js') //Users route
 
   .delete(function (req, res){
       tempemail=req.body.email;
-    for (index = 0; index < users.length; ++index) { //Go through each user
-        if (users[index].email==tempemail){ //If a user email in the array matches the delete request
-          users.splice(index, 1) //Delete user
+    for (index = 0; index < users.length; ++index) { // for loop der går igennem hver user 
+        if (users[index].email==tempemail){ //If statement: hvis user email i arrayet matcher delete request 
+          users.splice(index, 1) //så sletter den user
         }
     }
   
