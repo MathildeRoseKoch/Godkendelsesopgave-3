@@ -30,7 +30,7 @@ server.route('.Model/users.js') //Users route
   })
   .post(function (req, res) { //POST handling
     // skaber en ny paymentuser udfra variablerne fra POST request 
-    let user = new userClass.paymentUser(req.body.firstname, rep.body.lastname, req.body.gender, rep.body.age, req.body.interest, req.body.email, req.body.city, req.body.password, req.body.creditCardName, req.body.creditCardNumber, req.body.creditCardExpiryDate, req.body.creditCardCVC)
+    let user = new userClass.paymentUser(req.body.firstname, rep.body.lastname, rep.body.age, req.body.location, req.body.gender, req.body.interest, req.body.email, req.body.password, req.body.creditCardName, req.body.creditCardNumber, req.body.creditCardExpiryDate, req.body.creditCardCVC)
     users.push(user); //tilføjer den nye user til array
 
   })
@@ -63,7 +63,7 @@ server.route('.Model/users.js') //Users route
 
 
 
-const match = require('./Model/user.js');
+const match = require('./Model/user.js');// henter infomation fra klassen match 
 
 server.post("/match",(req, res) => {
     res.json(match[0], "match has been created")
@@ -99,7 +99,7 @@ server.delete("/match", (req, res) => {
 
 
 
-const interest = require('./Model/user.js');
+const interest = require('./Model/user.js'); // henter infomation om interest 
 
 server.post("/interest",(req, res) => {
   res.json(interest[0], "interest has been created")
